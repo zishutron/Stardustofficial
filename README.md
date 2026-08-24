@@ -1,5 +1,5 @@
 # Hi there, I'm Zishan 👋 
-### 🚀 Founder & Lead Developer at **STARDUST OFFICIAL**
+### 🚀 Founder & Lead Developer at **ZISHU TRON**
 
 <p align="left">
   <img src="https://img.shields.io/badge/Focus-Fullstack_%26_Cloud_Infrastructure-blue?style=for-the-badge&logo=github" />
@@ -34,7 +34,7 @@ As the sole architect behind the **Stardust Ecosystem**, I focus on crafting sle
 
 ---
 
-## 🛸 The Stardust Ecosystem (12 Live Applications)
+## 🛸 The Zishu Tron Ecosystem (12 Live Applications)
 
 Below is the complete portfolio of web applications, platforms, APIs, and games engineered under the **Stardust** umbrella:
 
