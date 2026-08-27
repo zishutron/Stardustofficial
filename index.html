@@ -9,26 +9,52 @@
   <!-- Google Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
   <style>
     /* ----- RESET & BASE ----- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f0f4f9;
+      --bg-card: #ffffff;
+      --bg-card-hover: #e8edf5;
+      --bg-hero: #e8edf5;
+      --text: #0a1a2e;
+      --text-muted: #3a5a7a;
+      --text-light: #7a9ab5;
+      --border: rgba(10, 30, 60, 0.08);
+      --border-card: rgba(10, 30, 60, 0.06);
+      --accent: #1a4b8c;
+      --accent-light: #2563eb;
+      --accent-glow: rgba(37, 99, 235, 0.08);
+      --shadow: 0 4px 24px rgba(10, 30, 60, 0.04);
+      --radius: 16px;
+      --transition: 0.25s ease;
+      --font: 'Inter', -apple-system, system-ui, sans-serif;
+    }
+    .dark {
+      --bg: #080d1a;
+      --bg-card: #0f1a2e;
+      --bg-card-hover: #1a2a44;
+      --bg-hero: #0a1222;
+      --text: #e8edf5;
+      --text-muted: #8aacd0;
+      --text-light: #5a7a9a;
+      --border: rgba(255,255,255,0.06);
+      --border-card: rgba(255,255,255,0.05);
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --accent: #4b8cff;
+      --accent-light: #5a9aff;
+      --accent-glow: rgba(37, 99, 235, 0.12);
     }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #fafcfc;
-      color: #0b1a2a;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.35s, color 0.35s;
       line-height: 1.6;
-      scroll-behavior: smooth;
       -webkit-font-smoothing: antialiased;
     }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+    a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
     img { max-width: 100%; display: block; }
     .container {
@@ -50,87 +76,82 @@
       border: none;
       cursor: pointer;
       transition: all 0.2s ease;
-      background: #0b1a2a;
+      background: var(--accent);
       color: white;
-      box-shadow: 0 8px 20px rgba(11, 26, 42, 0.08);
+      box-shadow: 0 8px 20px rgba(26, 75, 140, 0.15);
       letter-spacing: -0.01em;
+    }
+    .btn:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(26, 75, 140, 0.25);
     }
     .btn-outline {
       background: transparent;
-      color: #0b1a2a;
-      border: 1px solid rgba(11, 26, 42, 0.2);
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
       box-shadow: none;
     }
     .btn-outline:hover {
-      background: #0b1a2a;
+      background: var(--accent);
       color: white;
-      border-color: #0b1a2a;
-      box-shadow: 0 8px 24px rgba(11, 26, 42, 0.12);
-    }
-    .btn-primary {
-      background: #0b1a2a;
-      color: white;
-    }
-    .btn-primary:hover {
-      background: #1d3148;
+      border-color: var(--accent);
       transform: translateY(-2px);
-      box-shadow: 0 16px 32px rgba(11, 26, 42, 0.18);
     }
-    .btn-sm {
-      padding: 0.5rem 1.4rem;
-      font-size: 0.85rem;
-    }
+    .btn-sm { padding: 0.5rem 1.4rem; font-size: 0.85rem; }
 
     .card {
-      background: white;
-      border-radius: 28px;
+      background: var(--bg-card);
+      border-radius: var(--radius);
       padding: 2rem;
-      border: 1px solid rgba(11, 26, 42, 0.04);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-card);
+      box-shadow: var(--shadow);
       transition: all 0.25s ease;
     }
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 60px rgba(11, 26, 42, 0.06);
-      border-color: rgba(11, 26, 42, 0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(10, 30, 60, 0.08);
+      border-color: var(--accent-light);
     }
+    .dark .card:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
 
     /* ----- HEADER / NAV ----- */
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.78);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(11, 26, 42, 0.04);
-      transition: all 0.2s ease;
+      background: rgba(240, 244, 249, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
     }
-    header.scroll-compact { padding: 0.4rem 0; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+    .dark header { background: rgba(8, 13, 26, 0.82); }
+    header.scroll-compact { padding: 0.3rem 0; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
     .nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 76px;
+      height: 72px;
       transition: height 0.2s;
     }
-    header.scroll-compact .nav { height: 62px; }
+    header.scroll-compact .nav { height: 58px; }
     .logo {
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       letter-spacing: -0.02em;
-      color: #0b1a2a;
+      color: var(--text);
       display: flex;
       align-items: center;
       gap: 6px;
     }
-    .logo span { font-weight: 300; color: #3b5a7a; }
+    .logo span { font-weight: 300; color: var(--text-muted); }
     .nav-links {
       display: flex;
       gap: 2.2rem;
       font-weight: 500;
-      font-size: 0.95rem;
-      color: #1a2f44;
+      font-size: 0.9rem;
+      color: var(--text-muted);
     }
     .nav-links a {
       transition: color 0.15s;
@@ -143,12 +164,30 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: #0b1a2a;
+      background: var(--accent);
       transition: width 0.2s;
     }
-    .nav-links a:hover { color: #0b1a2a; }
+    .nav-links a:hover { color: var(--text); }
     .nav-links a:hover::after { width: 100%; }
-    .nav-cta .btn { padding: 0.5rem 1.8rem; font-size: 0.9rem; }
+    .nav-cta .btn { padding: 0.5rem 1.6rem; font-size: 0.85rem; }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 8px;
+      color: var(--text-muted);
+      transition: 0.15s;
+      display: flex;
+      align-items: center;
+    }
+    .theme-toggle:hover { background: var(--bg-card-hover); color: var(--text); }
+    .theme-toggle svg { width: 22px; height: 22px; }
     .hamburger {
       display: none;
       flex-direction: column;
@@ -161,16 +200,18 @@
     .hamburger span {
       width: 26px;
       height: 2.5px;
-      background: #0b1a2a;
+      background: var(--text);
       border-radius: 4px;
       transition: 0.2s;
     }
 
     /* ----- HERO ----- */
     .hero {
-      padding: 5rem 0 4rem;
+      padding: 4rem 0 3rem;
       position: relative;
       overflow: hidden;
+      background: var(--bg-hero);
+      transition: background 0.3s;
     }
     .hero-grid {
       display: grid;
@@ -180,30 +221,30 @@
     }
     .hero-badge {
       display: inline-block;
-      background: rgba(11, 26, 42, 0.04);
+      background: var(--accent-glow);
       padding: 0.3rem 1.2rem;
       border-radius: 60px;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 600;
-      letter-spacing: 0.4px;
-      color: #1d3b57;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(11,26,42,0.04);
+      letter-spacing: 0.6px;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(37, 99, 235, 0.1);
     }
     .hero h1 {
-      font-size: 4.2rem;
-      font-weight: 700;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 800;
       line-height: 1.05;
       letter-spacing: -0.03em;
-      color: #07131f;
-      margin-bottom: 1.8rem;
+      color: var(--text);
+      margin-bottom: 1.5rem;
     }
-    .hero h1 span { background: linear-gradient(135deg, #0b1a2a 40%, #4b6f94); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero h1 .highlight { color: var(--accent-light); }
     .hero p {
-      font-size: 1.2rem;
-      color: #2a415a;
+      font-size: 1.15rem;
+      color: var(--text-muted);
       max-width: 480px;
-      margin-bottom: 2.8rem;
+      margin-bottom: 2.5rem;
       font-weight: 400;
     }
     .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -211,136 +252,125 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
     }
-    .hero-visual .abstract-grid {
-      width: 100%;
-      max-width: 480px;
-      aspect-ratio: 1/1;
-      background: radial-gradient(circle at 30% 40%, rgba(75, 111, 148, 0.04) 0%, transparent 70%);
-      border-radius: 40px;
-      position: relative;
-      border: 1px solid rgba(11,26,42,0.02);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(2px);
-      padding: 20px;
+    .hero-brand-text {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      text-align: center;
+      color: var(--text);
     }
-
-    /* ----- ZISHU TRON HERO LOGO (embedded) ----- */
-    .zt-brand-logo {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-      user-select: none;
-    }
-    .zt-mark {
-      width: clamp(90px, 12vw, 145px);
-      height: clamp(90px, 12vw, 145px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .zt-mark svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-    .zt-wordmark {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      font-family: Inter, Manrope, "Plus Jakarta Sans", Arial, sans-serif;
-      font-size: clamp(22px, 3.5vw, 42px);
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      line-height: 1;
-    }
-    .zt-name-main { color: #0F172A; }
-    .zt-name-accent { color: #2563EB; }
-    @media (max-width: 480px) {
-      .zt-brand-logo { gap: 13px; }
-      .zt-wordmark { gap: 7px; letter-spacing: 0.09em; }
-    }
-    @media (prefers-color-scheme: dark) {
-      .zt-name-main { color: #F8FAFC; }
+    .hero-brand-text .accent { color: var(--accent-light); }
+    .hero-brand-sub {
+      font-size: 0.85rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      font-weight: 500;
     }
 
     /* ----- TRUST ----- */
     .trust {
-      padding: 2.5rem 0 4rem;
-      border-top: 1px solid rgba(11,26,42,0.04);
-      border-bottom: 1px solid rgba(11,26,42,0.04);
-      background: white;
+      padding: 2.5rem 0 3.5rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card);
+      transition: background 0.3s;
     }
-    .trust h2 { font-size: 2.2rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 0.8rem; }
-    .trust p { font-size: 1.1rem; color: #2f4a66; max-width: 700px; }
+    .trust h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.6rem; color: var(--text); }
+    .trust p { font-size: 1.05rem; color: var(--text-muted); max-width: 700px; }
 
     /* ----- SECTIONS ----- */
-    section { padding: 5rem 0; }
-    .section-title { font-size: 2.6rem; font-weight: 650; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
-    .section-sub { color: #3b5a7a; font-size: 1.1rem; margin-bottom: 3rem; }
+    section { padding: 4rem 0; }
+    .section-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+    .section-sub { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2.5rem; }
     .grid-2, .grid-3, .grid-4 {
       display: grid;
-      gap: 2rem;
+      gap: 1.8rem;
     }
     .grid-3 { grid-template-columns: repeat(3,1fr); }
     .grid-2 { grid-template-columns: repeat(2,1fr); }
     .grid-4 { grid-template-columns: repeat(4,1fr); }
 
-    /* ----- ABOUT ICONS (SVG) ----- */
-    .about-icon { width: 32px; height: 32px; margin-bottom: 0.8rem; display: block; }
+    /* ----- ABOUT ICONS ----- */
+    .about-icon { width: 32px; height: 32px; margin-bottom: 0.8rem; display: block; color: var(--accent); }
+
+    /* ----- PROJECT CARDS (real projects) ----- */
+    .project-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      border: 1px solid var(--border-card);
+      box-shadow: var(--shadow);
+      transition: all 0.25s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-light);
+      box-shadow: 0 12px 40px rgba(10, 30, 60, 0.08);
+    }
+    .dark .project-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+    .project-card .project-title { font-weight: 700; font-size: 1.1rem; color: var(--text); }
+    .project-card .project-desc { color: var(--text-muted); font-size: 0.85rem; margin: 0.2rem 0 0.6rem; }
+    .project-card .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--accent);
+      transition: gap 0.2s;
+    }
+    .project-card .project-link:hover { gap: 12px; }
+    .project-card .project-link svg { width: 14px; height: 14px; }
 
     /* ----- PRODUCTS ----- */
     .product-card .status {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 0.6px;
-      background: rgba(11,26,42,0.04);
+      background: var(--accent-glow);
       padding: 0.2rem 1rem;
       border-radius: 60px;
       display: inline-block;
-      margin-top: 0.5rem;
+      margin-top: 0.4rem;
       font-weight: 600;
+      color: var(--accent);
     }
-    .product-card .status.available { background: #e4f0f5; color: #0b3b4a; }
-    .product-card .status.dev { background: #f0f2f5; color: #3b4a5a; }
-    .product-card .status.coming { background: #f5f0ea; color: #6a4f3a; }
-
-    /* ----- PROJECTS ----- */
-    .project-card .project-status {
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 0.2rem 1rem;
-      border-radius: 60px;
-      background: rgba(11,26,42,0.04);
-      display: inline-block;
-    }
+    .product-card .status.available { background: #dbeafe; color: #1a4b8c; }
+    .dark .product-card .status.available { background: #1a2a44; color: #5a9aff; }
 
     /* ----- VISION DARK ----- */
     .vision-dark {
-      background: #07131f;
-      color: white;
+      background: var(--bg-hero);
+      color: var(--text);
       text-align: center;
-      padding: 6rem 2rem;
-      margin: 2rem 0;
+      padding: 5rem 2rem;
+      margin: 1.5rem 0;
       border-radius: 48px;
+      border: 1px solid var(--border);
+      transition: background 0.3s, color 0.3s;
     }
-    .vision-dark h2 { font-size: 3.2rem; font-weight: 600; letter-spacing: -0.02em; }
-    .vision-dark p { font-size: 1.2rem; max-width: 640px; margin: 1.5rem auto 0; color: rgba(255,255,255,0.7); }
-    .vision-dark .tag { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 2rem; display: block; }
+    .vision-dark h2 { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.02em; }
+    .vision-dark p { font-size: 1.15rem; max-width: 640px; margin: 1.2rem auto 0; color: var(--text-muted); }
+    .vision-dark .tag { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-light); margin-top: 1.8rem; display: block; }
 
-    /* ----- CONTACT FORM ----- */
+    /* ----- CONTACT ----- */
     .contact-form input, .contact-form textarea {
       width: 100%;
       padding: 0.9rem 1.2rem;
-      border: 1px solid rgba(11,26,42,0.06);
+      border: 1px solid var(--border);
       border-radius: 40px;
-      background: white;
+      background: var(--bg-card);
+      color: var(--text);
       font-family: inherit;
       font-size: 1rem;
       transition: 0.15s;
@@ -348,16 +378,17 @@
     .contact-form textarea { border-radius: 24px; min-height: 120px; resize: vertical; }
     .contact-form input:focus, .contact-form textarea:focus {
       outline: none;
-      border-color: #0b1a2a;
-      box-shadow: 0 0 0 3px rgba(11,26,42,0.04);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
     }
     .contact-form .btn { width: 100%; justify-content: center; }
 
     /* ----- FOOTER ----- */
     footer {
-      background: white;
-      border-top: 1px solid rgba(11,26,42,0.04);
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
       padding: 3rem 0 2rem;
+      transition: background 0.3s;
     }
     .footer-grid {
       display: flex;
@@ -365,15 +396,17 @@
       justify-content: space-between;
       gap: 2rem;
     }
-    .footer-links a { color: #1d3148; margin-right: 2rem; font-weight: 500; }
-    .footer-social a { margin-right: 1.6rem; opacity: 0.6; transition: 0.15s; display: inline-block; }
+    .footer-links a { color: var(--text-muted); margin-right: 2rem; font-weight: 500; font-size: 0.9rem; transition: 0.15s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-social a { margin-right: 1.4rem; opacity: 0.5; transition: 0.15s; display: inline-block; }
     .footer-social a:hover { opacity: 1; }
-    .footer-social svg { width: 22px; height: 22px; vertical-align: middle; }
+    .footer-social svg { width: 20px; height: 20px; vertical-align: middle; fill: var(--text-muted); }
+    .footer-social a:hover svg { fill: var(--text); }
     .footer-bottom {
       margin-top: 2.5rem;
-      font-size: 0.85rem;
-      color: #4d6a8a;
-      border-top: 1px solid rgba(11,26,42,0.04);
+      font-size: 0.8rem;
+      color: var(--text-light);
+      border-top: 1px solid var(--border);
       padding-top: 1.5rem;
       display: flex;
       justify-content: space-between;
@@ -382,14 +415,14 @@
 
     /* ----- RESPONSIVE ----- */
     @media (max-width: 1024px) {
-      .hero h1 { font-size: 3.2rem; }
+      .hero h1 { font-size: 3rem; }
       .grid-4 { grid-template-columns: repeat(2,1fr); }
     }
     @media (max-width: 820px) {
       .hero-grid { grid-template-columns: 1fr; }
-      .hero-visual { order: -1; }
-      .hero-visual .abstract-grid { max-width: 320px; }
-      .nav-links { display: none; flex-direction: column; background: white; position: absolute; top: 76px; left: 0; width: 100%; padding: 2rem; gap: 1.5rem; border-bottom: 1px solid #eee; }
+      .hero-visual { order: -1; margin-bottom: 0.5rem; }
+      .hero-brand-text { font-size: clamp(2.8rem, 10vw, 4.5rem); }
+      .nav-links { display: none; flex-direction: column; background: var(--bg-card); position: absolute; top: 72px; left: 0; width: 100%; padding: 2rem; gap: 1.2rem; border-bottom: 1px solid var(--border); }
       .nav-links.open { display: flex; }
       .hamburger { display: flex; }
       .nav-cta { display: none; }
@@ -397,10 +430,10 @@
     }
     @media (max-width: 600px) {
       .container { padding: 0 1.2rem; }
-      .hero h1 { font-size: 2.4rem; }
+      .hero h1 { font-size: 2.2rem; }
       .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-      .vision-dark h2 { font-size: 2.2rem; }
-      .footer-links a { margin-right: 1rem; }
+      .vision-dark h2 { font-size: 2rem; }
+      .footer-links a { margin-right: 1rem; font-size: 0.8rem; }
     }
   </style>
 </head>
@@ -412,13 +445,19 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#products">Products</a></li>
-        <li><a href="#technology">Technology</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#community">Community</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <div class="nav-cta"><a href="#products" class="btn btn-primary btn-sm">Explore Products</a></div>
-      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <div class="nav-cta"><a href="#products" class="btn btn-sm">Explore</a></div>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
     </div>
   </header>
 
@@ -428,35 +467,17 @@
       <div class="container hero-grid">
         <div>
           <div class="hero-badge">ZISHU TRON / TECHNOLOGY COMPANY</div>
-          <h1>Building Intelligent Technology <span>for Tomorrow.</span></h1>
+          <h1>Building Intelligent Technology <span class="highlight">for Tomorrow.</span></h1>
           <p>ZISHU TRON creates AI-powered products, software, digital experiences, and technology designed to make the future more useful, accessible, and intelligent.</p>
           <div class="hero-btns">
-            <a href="#products" class="btn btn-primary">Explore Our Products</a>
+            <a href="#products" class="btn">Explore Our Products</a>
             <a href="#about" class="btn btn-outline">About ZISHU TRON</a>
           </div>
         </div>
         <div class="hero-visual">
-          <div class="abstract-grid">
-            <!-- ZISHU TRON LOGO (SVG) -->
-            <div class="zt-brand-logo" aria-label="ZISHU TRON">
-              <div class="zt-mark">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ZISHU TRON logo">
-                  <defs>
-                    <linearGradient id="ztGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#0F172A"/>
-                      <stop offset="55%" stop-color="#2563EB"/>
-                      <stop offset="100%" stop-color="#6366F1"/>
-                    </linearGradient>
-                  </defs>
-                  <path d="M18 18H82V31H56V82H43V31H18V18Z" fill="url(#ztGradient)"/>
-                  <path d="M25 42H72L25 76V84H75V71H48L75 51V42H25Z" fill="#0F172A" opacity="0.95"/>
-                </svg>
-              </div>
-              <div class="zt-wordmark">
-                <span class="zt-name-main">ZISHU</span>
-                <span class="zt-name-accent">TRON</span>
-              </div>
-            </div>
+          <div>
+            <div class="hero-brand-text">ZISHU <span class="accent">TRON</span></div>
+            <div class="hero-brand-sub">Building Intelligent Technology</div>
           </div>
         </div>
       </div>
@@ -474,18 +495,18 @@
     <section id="about">
       <div class="container">
         <h2 class="section-title">About ZISHU TRON</h2>
-        <p style="max-width:720px; font-size:1.1rem; color:#2f4a66; margin-bottom:2.5rem;">ZISHU TRON is an independent technology brand focused on creating innovative software, AI experiences, digital platforms, and experimental technology products. Our goal is simple: build useful technology that feels modern, intuitive, and accessible.</p>
+        <p style="max-width:720px; font-size:1.05rem; color:var(--text-muted); margin-bottom:2.5rem;">ZISHU TRON is an independent technology brand focused on creating innovative software, AI experiences, digital platforms, and experimental technology products. Our goal is simple: build useful technology that feels modern, intuitive, and accessible.</p>
         <div class="grid-3">
           <div class="card about-feature">
-            <svg class="about-icon" viewBox="0 0 24 24" fill="none" stroke="#0b1a2a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            <svg class="about-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
             <h3>Innovation</h3><p>We continuously explore new ideas, technologies, and digital experiences.</p>
           </div>
           <div class="card about-feature">
-            <svg class="about-icon" viewBox="0 0 24 24" fill="none" stroke="#0b1a2a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <svg class="about-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             <h3>Intelligence</h3><p>We use AI and modern software technologies to create smarter products.</p>
           </div>
           <div class="card about-feature">
-            <svg class="about-icon" viewBox="0 0 24 24" fill="none" stroke="#0b1a2a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            <svg class="about-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
             <h3>Creation</h3><p>We turn ideas into real products, platforms, and experiences.</p>
           </div>
         </div>
@@ -493,86 +514,122 @@
     </section>
 
     <!-- PRODUCTS -->
-    <section id="products" style="background:white;">
+    <section id="products" style="background:var(--bg-card); transition: background 0.3s;">
       <div class="container">
         <h2 class="section-title">Products &amp; Experiences</h2>
         <p class="section-sub">Technology created by ZISHU TRON.</p>
         <div class="grid-3">
           <div class="card product-card">
-            <h3>Zishu</h3>
-            <p style="font-weight:500; color:#0b1a2a;">AI Voice Assistant</p>
-            <p style="color:#2f4a66; margin:0.5rem 0;">Zishu is an intelligent voice assistant designed to provide natural, useful, and conversational AI experiences.</p>
+            <h3>Zishu AI</h3>
+            <p style="font-weight:500; color:var(--accent);">AI Voice Assistant</p>
+            <p style="color:var(--text-muted); margin:0.4rem 0;">Zishu is an intelligent voice assistant designed to provide natural, useful, and conversational AI experiences.</p>
             <span class="status available">Available</span>
-            <div style="margin-top:1.2rem;"><a href="#" class="btn btn-primary btn-sm">Explore Zishu</a></div>
+            <div style="margin-top:1rem;"><a href="https://zishuai.cloud/" target="_blank" class="btn btn-sm">Explore Zishu</a></div>
           </div>
           <div class="card product-card">
-            <h3>AI Products</h3>
-            <p style="color:#2f4a66;">Experimental AI tools and assistants.</p>
-            <span class="status coming">Coming Soon</span>
+            <h3>Upcodez</h3>
+            <p style="font-weight:500; color:var(--accent);">Marketplace</p>
+            <p style="color:var(--text-muted); margin:0.4rem 0;">A modern marketplace platform for digital products and services.</p>
+            <span class="status available">Available</span>
+            <div style="margin-top:1rem;"><a href="https://zishutron.github.io/upcodez/" target="_blank" class="btn btn-sm">Explore</a></div>
           </div>
           <div class="card product-card">
-            <h3>Digital Platforms</h3>
-            <p style="color:#2f4a66;">Next-generation software experiences.</p>
-            <span class="status dev">In Development</span>
+            <h3>Zishu Insight</h3>
+            <p style="font-weight:500; color:var(--accent);">Official Updates</p>
+            <p style="color:var(--text-muted); margin:0.4rem 0;">The official newsroom for ZISHU TRON updates and announcements.</p>
+            <span class="status available">Available</span>
+            <div style="margin-top:1rem;"><a href="https://zishutron.github.io/zishu-insight/" target="_blank" class="btn btn-sm">Explore</a></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TECHNOLOGY -->
-    <section id="technology">
+    <!-- PROJECTS (Real projects) -->
+    <section id="projects">
       <div class="container">
-        <h2 class="section-title">Technology Behind Our Ideas</h2>
-        <div class="grid-3" style="margin-top:2rem;">
-          <div class="card"><h4>Artificial Intelligence</h4><p style="color:#2f4a66;">Intelligent systems and models.</p></div>
-          <div class="card"><h4>Web Technologies</h4><p style="color:#2f4a66;">Modern frontend &amp; backend.</p></div>
-          <div class="card"><h4>Mobile Applications</h4><p style="color:#2f4a66;">Native &amp; cross-platform.</p></div>
-          <div class="card"><h4>Cloud Infrastructure</h4><p style="color:#2f4a66;">Scalable &amp; reliable.</p></div>
-          <div class="card"><h4>Automation</h4><p style="color:#2f4a66;">Streamlining workflows.</p></div>
-          <div class="card"><h4>Digital Experiences</h4><p style="color:#2f4a66;">User-first design.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" style="background:white;">
-      <div class="container">
-        <h2 class="section-title">Projects</h2>
-        <p class="section-sub">Ideas become products when we build them.</p>
+        <h2 class="section-title">Our Projects</h2>
+        <p class="section-sub">Real products and platforms built by ZISHU TRON.</p>
         <div class="grid-3">
-          <div class="card project-card"><h4>Zishu Core</h4><p>Voice AI platform</p><span class="project-status" style="background:#e4f0f5;">Live</span><div style="margin-top:1rem;"><a href="#" class="btn btn-outline btn-sm">View Project</a></div></div>
-          <div class="card project-card"><h4>Nova Studio</h4><p>Creative toolkit</p><span class="project-status" style="background:#f0f2f5;">In Development</span><div style="margin-top:1rem;"><a href="#" class="btn btn-outline btn-sm">View Project</a></div></div>
-          <div class="card project-card"><h4>Eclipse Lab</h4><p>Experimental AR</p><span class="project-status" style="background:#f5f0ea;">Experimental</span><div style="margin-top:1rem;"><a href="#" class="btn btn-outline btn-sm">View Project</a></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- COMMUNITY -->
-    <section id="community">
-      <div class="container">
-        <h2 class="section-title">Build With Us</h2>
-        <p style="max-width:600px; color:#2f4a66; margin-bottom:2.5rem;">Technology becomes better when ideas are shared. Join the ZISHU TRON community to follow our projects, discuss ideas, and stay connected.</p>
-        <div class="grid-4">
-          <a href="#" class="card" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px;">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="#0b1a2a"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            <span>GitHub</span><span style="font-size:0.9rem;color:#3b5a7a;">Code &amp; development</span>
-          </a>
-          <a href="#" class="card" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px;">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="#0b1a2a"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.01.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.99.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.99a.076.076 0 00.085.028 19.839 19.839 0 005.994-3.01.077.077 0 00.03-.057c.5-5.096-.838-9.59-3.51-13.66a.061.061 0 00-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-            <span>Discord</span><span style="font-size:0.9rem;color:#3b5a7a;">Community &amp; discussions</span>
-          </a>
-          <a href="#" class="card" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px;">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="#0b1a2a"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            <span>X</span><span style="font-size:0.9rem;color:#3b5a7a;">Updates &amp; announcements</span>
-          </a>
-          <a href="#" class="card" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px;">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="#0b1a2a"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            <span>YouTube</span><span style="font-size:0.9rem;color:#3b5a7a;">Videos &amp; demos</span>
-          </a>
-          <a href="#" class="card" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px;">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="#0b1a2a"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            <span>LinkedIn</span><span style="font-size:0.9rem;color:#3b5a7a;">Professional presence</span>
-          </a>
+          <div class="project-card">
+            <div class="project-title">Aisha</div>
+            <div class="project-desc">Proposal website for creative projects and collaborations.</div>
+            <a href="https://zishutron.github.io/Aisha/" target="_blank" class="project-link">Visit Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Zishu AI</div>
+            <div class="project-desc">Intelligent voice assistant with natural conversation capabilities.</div>
+            <a href="https://zishuai.cloud/" target="_blank" class="project-link">Visit Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Upcodez</div>
+            <div class="project-desc">Digital marketplace for software, tools, and creative products.</div>
+            <a href="https://zishutron.github.io/upcodez/" target="_blank" class="project-link">Visit Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Stardust Canvas</div>
+            <div class="project-desc">Photo sharing platform for creative communities.</div>
+            <a href="https://zishutron.github.io/Stardust-media/" target="_blank" class="project-link">Visit Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Zishu App Store</div>
+            <div class="project-desc">Application store featuring ZISHU TRON products.</div>
+            <a href="https://zishutron.github.io/Stardust-store/" target="_blank" class="project-link">Visit Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Ring For Me</div>
+            <div class="project-desc">Simple and elegant ringtone customization tool.</div>
+            <a href="https://zishutron.github.io/ringforme/" target="_blank" class="project-link">Visit Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Zishu X Messenger</div>
+            <div class="project-desc">Lightweight messaging platform for quick communication.</div>
+            <a href="https://zishutron.github.io/Stardust-X-messenger/" target="_blank" class="project-link">Visit Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Stardust Hub</div>
+            <div class="project-desc">Social media platform for creators and communities.</div>
+            <a href="https://zishutron.github.io/Stardust-hub/" target="_blank" class="project-link">Visit Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Stardust Warrior</div>
+            <div class="project-desc">Zombie survival game with immersive gameplay.</div>
+            <a href="https://zishutron.github.io/Stardust-warrior/" target="_blank" class="project-link">Play Game →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Stardust Student OS</div>
+            <div class="project-desc">Educational operating system for students and learners.</div>
+            <a href="https://zishutron.github.io/stardust-student-OS/" target="_blank" class="project-link">Visit Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Stardust Learning</div>
+            <div class="project-desc">Online learning platform with interactive courses.</div>
+            <a href="https://zishutron.github.io/stardust-learning/" target="_blank" class="project-link">Visit Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Roller Splash Pro</div>
+            <div class="project-desc">Fast-paced ball game with addictive mechanics.</div>
+            <a href="https://zishutron.github.io/Stardust-ball-game/" target="_blank" class="project-link">Play Game →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Stardust Trader</div>
+            <div class="project-desc">Trading platform for digital assets and collectibles.</div>
+            <a href="https://zishutron.github.io/stardust-trader/" target="_blank" class="project-link">Visit Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Stardust Business Tycoon</div>
+            <div class="project-desc">Business simulation game for aspiring entrepreneurs.</div>
+            <a href="https://zishutron.github.io/Stardust-business-tycoon/" target="_blank" class="project-link">Play Game →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Stardust Formatter</div>
+            <div class="project-desc">Text and code formatting tool for developers.</div>
+            <a href="https://zishutron.github.io/stardust-formatter/" target="_blank" class="project-link">Visit Project →</a>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Stardust Discord Bot</div>
+            <div class="project-desc">Official website for the Stardust Discord Bot.</div>
+            <a href="https://zishutron.github.io/Stardust-website/" target="_blank" class="project-link">Visit Project →</a>
+          </div>
         </div>
       </div>
     </section>
@@ -586,11 +643,46 @@
       </div>
     </section>
 
-    <!-- CONTACT (no email, just frontend) -->
-    <section id="contact" style="background:white;">
+    <!-- COMMUNITY -->
+    <section id="community" style="background:var(--bg-card); transition: background 0.3s;">
+      <div class="container">
+        <h2 class="section-title">Build With Us</h2>
+        <p style="max-width:600px; color:var(--text-muted); margin-bottom:2.5rem;">Technology becomes better when ideas are shared. Join the ZISHU TRON community to follow our projects, discuss ideas, and stay connected.</p>
+        <div class="grid-4">
+          <a href="https://github.com/zishutron" target="_blank" class="card" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--text)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span style="font-weight:600;">GitHub</span>
+            <span style="font-size:0.85rem;color:var(--text-muted);">Code &amp; development</span>
+          </a>
+          <a href="https://discord.gg/Xhh5r2UM5C" target="_blank" class="card" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--text)"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.01.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.99.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.99a.076.076 0 00.085.028 19.839 19.839 0 005.994-3.01.077.077 0 00.03-.057c.5-5.096-.838-9.59-3.51-13.66a.061.061 0 00-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+            <span style="font-weight:600;">Discord</span>
+            <span style="font-size:0.85rem;color:var(--text-muted);">Community &amp; discussions</span>
+          </a>
+          <a href="https://x.com/zishanstardust" target="_blank" class="card" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--text)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span style="font-weight:600;">X</span>
+            <span style="font-size:0.85rem;color:var(--text-muted);">Updates &amp; announcements</span>
+          </a>
+          <a href="https://youtube.com/@zishutron" target="_blank" class="card" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--text)"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            <span style="font-weight:600;">YouTube</span>
+            <span style="font-size:0.85rem;color:var(--text-muted);">Videos &amp; demos</span>
+          </a>
+          <a href="https://linkedin.com/in/zishu-tron-a8a71241" target="_blank" class="card" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--text)"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span style="font-weight:600;">LinkedIn</span>
+            <span style="font-size:0.85rem;color:var(--text-muted);">Professional presence</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" style="background:var(--bg); transition: background 0.3s;">
       <div class="container">
         <h2 class="section-title">Let's Build Something.</h2>
-        <p style="max-width:600px; color:#2f4a66; margin-bottom:2rem;">Have an idea, collaboration proposal, project opportunity, or simply want to connect? We'd love to hear from you.</p>
+        <p style="max-width:600px; color:var(--text-muted); margin-bottom:2rem;">Have an idea, collaboration proposal, project opportunity, or simply want to connect? We'd love to hear from you.</p>
         <div style="max-width:600px;">
           <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for reaching out. ZISHU TRON will respond soon.')">
             <div style="display:grid; gap:1rem;">
@@ -598,7 +690,7 @@
               <input type="email" placeholder="Email" required />
               <input type="text" placeholder="Subject" />
               <textarea placeholder="Message" required></textarea>
-              <button type="submit" class="btn btn-primary">Send Message</button>
+              <button type="submit" class="btn">Send Message</button>
             </div>
           </form>
         </div>
@@ -610,16 +702,24 @@
   <footer>
     <div class="container">
       <div class="footer-grid">
-        <div><span style="font-weight:700; font-size:1.3rem;">ZISHU TRON</span><br><span style="color:#3b5a7a;">Building Intelligent Technology.</span></div>
+        <div>
+          <span style="font-weight:700; font-size:1.3rem; color:var(--text);">ZISHU TRON</span>
+          <br><span style="color:var(--text-muted);">Building Intelligent Technology.</span>
+        </div>
         <div class="footer-links">
-          <a href="#home">Home</a><a href="#about">About</a><a href="#products">Products</a><a href="#projects">Projects</a><a href="#community">Community</a><a href="#contact">Contact</a>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#products">Products</a>
+          <a href="#projects">Projects</a>
+          <a href="#community">Community</a>
+          <a href="#contact">Contact</a>
         </div>
         <div class="footer-social">
-          <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="#0b1a2a"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></a>
-          <a href="#" aria-label="Discord"><svg viewBox="0 0 24 24" fill="#0b1a2a"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.01.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.99.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.99a.076.076 0 00.085.028 19.839 19.839 0 005.994-3.01.077.077 0 00.03-.057c.5-5.096-.838-9.59-3.51-13.66a.061.061 0 00-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
-          <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="#0b1a2a"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="#0b1a2a"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
-          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="#0b1a2a"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="https://github.com/zishutron" target="_blank" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></a>
+          <a href="https://discord.gg/Xhh5r2UM5C" target="_blank" aria-label="Discord"><svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.01.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.99.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.99a.076.076 0 00.085.028 19.839 19.839 0 005.994-3.01.077.077 0 00.03-.057c.5-5.096-.838-9.59-3.51-13.66a.061.061 0 00-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+          <a href="https://x.com/zishanstardust" target="_blank" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://youtube.com/@zishutron" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          <a href="https://linkedin.com/in/zishu-tron-a8a71241" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -630,14 +730,26 @@
   </footer>
 
   <script>
-    // sticky header compact
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('zt-theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    }
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('zt-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // Sticky header compact
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 20) header.classList.add('scroll-compact');
       else header.classList.remove('scroll-compact');
     });
 
-    // mobile hamburger
+    // Mobile hamburger
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     hamburger.addEventListener('click', () => {
@@ -646,17 +758,6 @@
     navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
       navLinks.classList.remove('open');
     }));
-
-    // social placeholders
-    document.querySelectorAll('.footer-social a, .card a[href="#"]').forEach(el => {
-      if (el.getAttribute('href') === '#') {
-        el.setAttribute('target', '_blank');
-        el.addEventListener('click', (e) => {
-          e.preventDefault();
-          alert('Social link placeholder: official destinations will be added.');
-        });
-      }
-    });
   </script>
 </body>
 </html>
