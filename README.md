@@ -87,7 +87,7 @@ Below is the complete portfolio of web applications, platforms, APIs, and games 
 
 - 🌐 **Main Website:** [ZISHU TRON](https://zishutron.github.io/zishutron/)
 - 📰 **Official Updates:** [Zishu Insight](https://zishutron.github.io/zishu-insight/)
-- 💼 **Official Support:** [support.zishutron@gmail.com](mailto:support.zishutron@gmail.com)
+- 💼 **Official Support:** [support.stardustofficial@gmail.com](mailto:support.stardustofficial@gmail.com)
 - 💻 **GitHub:** [@zishutron](https://github.com/zishutron)
 
 <br/>
