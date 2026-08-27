@@ -363,26 +363,6 @@
     .vision-dark p { font-size: 1.15rem; max-width: 640px; margin: 1.2rem auto 0; color: var(--text-muted); }
     .vision-dark .tag { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-light); margin-top: 1.8rem; display: block; }
 
-    /* ----- CONTACT ----- */
-    .contact-form input, .contact-form textarea {
-      width: 100%;
-      padding: 0.9rem 1.2rem;
-      border: 1px solid var(--border);
-      border-radius: 40px;
-      background: var(--bg-card);
-      color: var(--text);
-      font-family: inherit;
-      font-size: 1rem;
-      transition: 0.15s;
-    }
-    .contact-form textarea { border-radius: 24px; min-height: 120px; resize: vertical; }
-    .contact-form input:focus, .contact-form textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-glow);
-    }
-    .contact-form .btn { width: 100%; justify-content: center; }
-
     /* ----- FOOTER ----- */
     footer {
       background: var(--bg-card);
@@ -674,25 +654,6 @@
             <span style="font-weight:600;">LinkedIn</span>
             <span style="font-size:0.85rem;color:var(--text-muted);">Professional presence</span>
           </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" style="background:var(--bg); transition: background 0.3s;">
-      <div class="container">
-        <h2 class="section-title">Let's Build Something.</h2>
-        <p style="max-width:600px; color:var(--text-muted); margin-bottom:2rem;">Have an idea, collaboration proposal, project opportunity, or simply want to connect? We'd love to hear from you.</p>
-        <div style="max-width:600px;">
-          <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for reaching out. ZISHU TRON will respond soon.')">
-            <div style="display:grid; gap:1rem;">
-              <input type="text" placeholder="Name" required />
-              <input type="email" placeholder="Email" required />
-              <input type="text" placeholder="Subject" />
-              <textarea placeholder="Message" required></textarea>
-              <button type="submit" class="btn">Send Message</button>
-            </div>
-          </form>
         </div>
       </div>
     </section>
